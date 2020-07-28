@@ -1,28 +1,27 @@
 // Write your JavaScript code here!
 window.addEventListener("load", function() {
-   let form = document.querySelector("Form");
-form.addEventListener("submit",function(event)
+   let form = document.querySelector("form");
+form.addEventListener("submit",function()
 {  
+      event.preventDefault();
       let pilotnameInput = document.querySelector("input[name=pilotName]");
       let copilotnameInput = document.querySelector("input[name=copilotName]");
       let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
-      let cargoMassInput = document.queryaSelector("input[name=cargoMass]");
+      let cargoMassInput = document.querySelector("input[name=cargoMass]");
       let faultyItems = document.getElementById("faultyItems");
-     // event.preventDefault();
+     
        if (pilotnameInput.value === "" || copilotnameInput.value === "" || fuelLevelInput.value ==="" || cargoMassInput.value==="")
        {
           console.log("hi");
-                    alert("All fields are required!");
-          
-         }else if(isNaN(pilotnameInput.value) === false ||  isNaN(copilotnameInput.value)=== false  || isNaN(fuelLevelInput.value)=== true || isNaN(cargoMassInput.value) === true) 
+          alert("All fields are required!");
+                   }else if(isNaN(pilotnameInput.value) === false ||  isNaN(copilotnameInput.value)=== false  || isNaN(fuelLevelInput.value)=== true || isNaN(cargoMassInput.value) === true) 
          {        
          alert("Invalid entry");
           } else
           {
             
             faultyItems.style.visibility = "visible"; 
-          
-          
+                    
            if((fuelLevelInput.value) < 10000)
            {
             pilotStatus.innerHTML =`Pilot ${pilotnameInput.value} is ready for launch`;

@@ -1,5 +1,26 @@
 // Write your JavaScript code here!
 window.addEventListener("load", function() {
+ let json=[];
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
+      
+   response.json().then(function(json){
+          
+   let missionTarget=  document.getElementById("missionTarget")
+   let index = Math.floor(Math.random()*json.length);
+   missionTarget.innerHTML=`<h2>Mission Destination</h2>
+   <ol>
+      <li>Name: ${json[index].name}</li>
+   <li>Diameter: ${json[index].diameter}</li>
+      <li>Star: ${json[index].star}</li>
+      <li>Distance from Eainrth: ${json[index].distance}</li>
+      <li>Number of Moons: ${json[index].moons}</li>
+   </ol>
+   <img src="${json[index].image}">
+`
+});
+
+
+   });
    let form = document.querySelector("form");
 form.addEventListener("submit",function()
 {  
@@ -16,7 +37,7 @@ form.addEventListener("submit",function()
           alert("All fields are required!");
                    }else if(isNaN(pilotnameInput.value) === false ||  isNaN(copilotnameInput.value)=== false  || isNaN(fuelLevelInput.value)=== true || isNaN(cargoMassInput.value) === true) 
          {        
-         alert("Invalid entry");
+         alert("Invalid entry.Pilot and copilot names should be string.fuel and cargo must be number.");
           } else
           {
             
@@ -25,10 +46,24 @@ form.addEventListener("submit",function()
            if((fuelLevelInput.value) < 10000)
            {
             pilotStatus.innerHTML =`Pilot ${pilotnameInput.value} is ready for launch`;
-            copilotStatus.innerHTML=`Copilot ${copilotnameInput.value}is ready for launch`;
+            copilotStatus.innerHTML=`Copilot ${copilotnameInput.value} is ready for launch`;
             fuelStatus.innerHTML="Fuel too low for launch";
             launchStatus.innerHTML="Shuttle not ready for launch";
             launchStatus.style.color="red";
+           }else if((cargoMassInput.value) >10000)
+           {
+            pilotStatus.innerHTML =`Pilot ${pilotnameInput.value} is ready for launch`;
+            copilotStatus.innerHTML=`Copilot ${copilotnameInput.value} is ready for launch`;
+            cargoStatus.innerHTML="Cargo mass too high to take off";
+            launchStatus.innerHTML="Shuttle not ready for launch";
+            launchStatus.style.color="red";
+           }else
+           {
+            pilotStatus.innerHTML =`Pilot ${pilotnameInput.value} is ready for launch`;
+            copilotStatus.innerHTML=`Copilot ${copilotnameInput.value} is ready for launch`;
+            launchStatus.innerHTML="Shuttle is ready for launch";
+            launchStatus.style.color="green";
+
            }
          }  
          
@@ -36,14 +71,4 @@ form.addEventListener("submit",function()
         
        });
 });
-/*This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ol>
-   <li>Name: ${}</li>
-<li>Diameter: ${}</li>
-   <li>Star: ${Tatoo I & Tatoo II}</li>
-   <li>Distance from Earth: ${43000 light years from galactic core}</li>
-   <li>Number of Moons: ${https://www.nasa.gov/sites/default/files/images/587837main_Kepler16_transit_art2_full.jpg}</li>
-</ol>
-<img src="${}">
-*/
+/*This block of code shows how to format the HTML once you fetch some planetary JSON!*/
